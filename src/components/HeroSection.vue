@@ -9,7 +9,7 @@ const personalInfo = {
   birth: '1999.05.10',
   major: '생명공학부 바이오소재전공',
   email: 'dio0517@naver.com',
-  tagline: '꾸준함으로 성장하는 백엔드 개발자'
+  tagline: '꾸준함으로 성장하는 백엔드 개발자',
 }
 
 onMounted(() => {
@@ -36,8 +36,8 @@ onMounted(() => {
       <h1 class="hero-title">
         <span class="greeting">안녕하세요,</span>
         <span class="name">{{ personalInfo.name }}</span>
-        <span class="name-en">{{ personalInfo.nameEn }}</span>
         <span class="role">입니다.</span>
+        <span class="name-en">{{ personalInfo.nameEn }}</span>
       </h1>
 
       <p class="hero-tagline">{{ personalInfo.tagline }}</p>
@@ -69,8 +69,15 @@ onMounted(() => {
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">
           프로젝트 보기
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
           </svg>
         </a>
         <a href="#contact" class="btn btn-secondary">연락하기</a>
@@ -127,14 +134,19 @@ onMounted(() => {
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(30px, -30px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -30px);
+  }
 }
 
 .grid-pattern {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
@@ -174,8 +186,13 @@ onMounted(() => {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .hero-title {
@@ -211,6 +228,9 @@ onMounted(() => {
 
 .role {
   color: var(--text-primary);
+  font-size: 0.5em;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 
 .hero-tagline {
@@ -326,8 +346,15 @@ onMounted(() => {
 }
 
 @keyframes scrollLine {
-  0%, 100% { transform: scaleY(1); opacity: 1; }
-  50% { transform: scaleY(0.5); opacity: 0.5; }
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.5;
+  }
 }
 
 @media (max-width: 768px) {
