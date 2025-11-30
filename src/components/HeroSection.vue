@@ -10,7 +10,7 @@ const personalInfo = {
   major: '생명공학부 바이오소재전공',
   email: 'dio0517@naver.com',
   tagline: '꾸준함으로 성장하는 백엔드 개발자',
-  certificates: 'SQLD, ADsP',
+  certificates: 'SQLD(2024.04.05), ADsP(2025.11.28)',
 }
 
 onMounted(() => {
