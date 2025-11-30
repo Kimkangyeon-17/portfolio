@@ -1,7 +1,46 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
+// 1. 이미지를 import 구문으로 불러옵니다.
+// (components 폴더에서 상위 폴더인 src로 나갔다가 images로 들어가는 상대 경로입니다)
+import ssafyLogo from '../images/ssafy_image.png'
+import modulabsLogo from '../images/image_2.png'
+// 파일 탐색기에 image.png가 있는 것으로 보아 CJ 로고로 추정됩니다.
+// 만약 파일명이 다르다면 import cjLogo from '../images/image_2.png' 등으로 수정하세요.
+import cjLogo from '../images/ci_Bioetc._01.jpg'
+
 const isVisible = ref(false)
+
+// 교육 및 활동 데이터
+const educationHistory = [
+  {
+    id: 1,
+    org: 'SSAFY',
+    role: '14기 교육생',
+    period: '2025.07 ~',
+    desc: '삼성 청년 SW 아카데미',
+    detail: '알고리즘 및 웹 개발 심화 과정',
+    logoUrl: ssafyLogo, // 2. 여기서 import한 변수를 사용합니다 (따옴표 없음)
+  },
+  {
+    id: 2,
+    org: '모두의 연구소',
+    role: '오름 캠프 Backend 3기',
+    period: '2024.11.27 ~ 2025.03.24',
+    desc: 'Python, Django 기반 백엔드 개발 과정',
+    detail: '개인 프로젝트 블로그 및 ICT 교육 플랫폼 개발 경험',
+    logoUrl: modulabsLogo, // 변수 사용
+  },
+  {
+    id: 3,
+    org: 'CJ OliveNetworks',
+    role: 'Remote Internship',
+    period: '2024.05.13 ~ 2024.08.08',
+    desc: 'Excel을 활용한 데이터 분석 실무',
+    detail: 'DS 인증 평가 통과 및 Data Science 인증서 취득',
+    logoUrl: cjLogo, // 변수 사용
+  },
+]
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -12,7 +51,7 @@ onMounted(() => {
         }
       })
     },
-    { threshold: 0.2 }
+    { threshold: 0.2 },
   )
 
   const section = document.querySelector('#about')
@@ -35,32 +74,34 @@ onMounted(() => {
             안녕하세요! 저는 <span class="accent">백엔드 개발자</span>를 꿈꾸는 김강연입니다.
           </p>
           <p>
-            생명공학을 전공하다가 개발의 매력에 빠져 새로운 도전을 시작했습니다.
-            현재 <span class="accent">SSAFY(삼성 청년 SW 아카데미)</span>에서 
-            Python과 Django를 중심으로 백엔드 개발을 공부하고 있습니다.
+            생명공학을 전공하다가 개발의 매력에 빠져 새로운 도전을 시작했습니다. 현재
+            <span class="accent">SSAFY(삼성 청년 SW 아카데미)</span>에서 Python과 Django를 중심으로
+            백엔드 개발을 공부하고 있습니다.
           </p>
           <p>
             꾸준함을 가장 큰 무기로 삼아, 매일 조금씩 성장하는 개발자가 되기 위해 노력하고 있습니다.
-            새로운 기술을 배우고 적용하는 것을 즐기며, 문제 해결 과정에서 얻는 성취감을 
-            원동력으로 삼고 있습니다.
+            새로운 기술을 배우고 적용하는 것을 즐기며, 문제 해결 과정에서 얻는 성취감을 원동력으로
+            삼고 있습니다.
           </p>
         </div>
 
-        <div class="about-highlights">
-          <div class="highlight-card">
-            <div class="highlight-icon">🎯</div>
-            <h3>목표</h3>
-            <p>사용자에게 가치를 전달하는 안정적인 서비스를 만드는 백엔드 개발자</p>
-          </div>
-          <div class="highlight-card">
-            <div class="highlight-icon">📚</div>
-            <h3>학습</h3>
-            <p>SSAFY에서 Django, DRF, 알고리즘 등 실무 중심의 개발 역량 강화 중</p>
-          </div>
-          <div class="highlight-card">
-            <div class="highlight-icon">🚀</div>
-            <h3>성장</h3>
-            <p>블로그와 스터디를 통해 배운 것을 기록하고 공유하며 함께 성장</p>
+        <div class="education-section">
+          <h3 class="subsection-title">Education & Experience</h3>
+          <div class="education-list">
+            <div v-for="item in educationHistory" :key="item.id" class="edu-card">
+              <div class="edu-logo-wrapper">
+                <img :src="item.logoUrl" :alt="item.org" class="edu-logo" />
+              </div>
+              <div class="edu-info">
+                <div class="edu-header">
+                  <h4 class="edu-org">{{ item.org }}</h4>
+                  <span class="edu-period">{{ item.period }}</span>
+                </div>
+                <div class="edu-role">{{ item.role }}</div>
+                <p class="edu-desc">{{ item.desc }}</p>
+                <p class="edu-detail" v-if="item.detail">- {{ item.detail }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,8 +154,9 @@ onMounted(() => {
 }
 
 .about-content {
-  display: grid;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* 텍스트와 교육 섹션 사이 간격 */
 }
 
 .about-text {
@@ -139,40 +181,101 @@ onMounted(() => {
   font-weight: 500;
 }
 
-.about-highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+/* Education Section Styling */
+.subsection-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  border-left: 4px solid var(--accent-primary);
+  padding-left: 1rem;
+}
+
+.education-list {
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
-.highlight-card {
+.edu-card {
+  display: flex;
+  gap: 2rem;
   background: var(--bg-card);
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 16px;
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  align-items: center;
 }
 
-.highlight-card:hover {
+.edu-card:hover {
   border-color: var(--accent-primary);
-  transform: translateY(-4px);
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.highlight-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.edu-logo-wrapper {
+  width: 80px;
+  height: 80px;
+  background: #fff; /* 로고가 잘 보이도록 흰 배경 */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.highlight-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.75rem;
+.edu-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.edu-info {
+  flex: 1;
+}
+
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.edu-org {
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
-.highlight-card p {
-  font-size: 0.95rem;
+.edu-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.edu-role {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.edu-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.edu-detail {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
@@ -186,6 +289,28 @@ onMounted(() => {
 
   .section-line {
     display: none;
+  }
+
+  .edu-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .edu-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .edu-period {
+    font-size: 0.8rem;
+  }
+
+  .edu-logo-wrapper {
+    width: 60px;
+    height: 60px;
   }
 }
 </style>

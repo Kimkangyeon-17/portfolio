@@ -10,6 +10,7 @@ const personalInfo = {
   major: '생명공학부 바이오소재전공',
   email: 'dio0517@naver.com',
   tagline: '꾸준함으로 성장하는 백엔드 개발자',
+  certificates: 'SQLD, ADsP',
 }
 
 onMounted(() => {
@@ -62,6 +63,13 @@ onMounted(() => {
           <div class="info-content">
             <span class="info-label">Email</span>
             <span class="info-value">{{ personalInfo.email }}</span>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🏆</span>
+          <div class="info-content">
+            <span class="info-label">Certificates</span>
+            <span class="info-value">{{ personalInfo.certificates }}</span>
           </div>
         </div>
       </div>
@@ -256,6 +264,8 @@ onMounted(() => {
   border-radius: 12px;
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  /* 카드가 많아져서 유연하게 너비 조절 */
+  flex: 1 1 200px;
 }
 
 .info-card:hover {
@@ -364,6 +374,11 @@ onMounted(() => {
 
   .info-cards {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  .info-card {
+    flex: initial;
   }
 
   .hero-cta {
