@@ -1,56 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { projects } from '../data/projects'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const isVisible = ref(false)
 
-const projects = [
-  {
-    id: 1,
-    title: 'DevRunDev',
-    subtitle: 'IT 개발자를 위한 온라인 교육 플랫폼',
-    description:
-      '강사들은 실무 중심의 강의를 제작하고 수강생들은 최신 기술을 배우며 성장할 수 있도록 지원합니다. 강의 진행률, 평가 시스템, 강의 별 퀴즈 등의 기능을 통해 효율적인 학습 경험을 제공합니다.',
-    features: [
-      '역할 기반 사용자 시스템 (학생/강사/관리자)',
-      '소셜 로그인 (Google, Kakao, Naver)',
-      '강의 생성 및 승인 워크플로우',
-      '강의 진행률 추적 및 수료증 발급',
-      '퀴즈 시스템 및 리뷰 기능',
-    ],
-    tech: ['Django', 'SQLite', 'Bootstrap', 'JavaScript', 'HTML/CSS'],
-    github: 'https://github.com/DevRunDev/DevRunDev',
-    color: '#22c55e',
-  },
-  {
-    id: 2,
-    title: 'DevRunDev DRF',
-    subtitle: 'REST API 기반 온라인 교육 플랫폼',
-    description:
-      'DevRunDev의 REST API 버전으로, Django REST Framework를 활용하여 백엔드 API를 구축했습니다. 결제 시스템, QnA 기능, 관리자 대시보드 등 더욱 확장된 기능을 제공합니다.',
-    features: [
-      'RESTful API 설계 및 구현',
-      'JWT/Token 기반 인증 시스템',
-      '결제 시스템 통합',
-      '레슨별 QnA 기능',
-      '관리자 대시보드 및 분석',
-    ],
-    tech: ['Django', 'DRF', 'SQLite', 'HTMX', 'JavaScript', 'CSS'],
-    github: 'https://github.com/DevRunDev-DRF/DevRunDev-DRF',
-    color: '#6366f1',
-  },
-  {
-    id: 3,
-    title: 'Coming Soon',
-    subtitle: '새로운 프로젝트 준비 중',
-    description:
-      '더 나은 서비스와 기술 역량 향상을 위해 새로운 프로젝트를 준비하고 있습니다. 곧 업데이트될 예정이니 기대해 주세요!',
-    features: [],
-    tech: ['TBD'],
-    github: null,
-    color: '#8b5cf6',
-    isComingSoon: true,
-  },
-]
 
 onMounted(() => {
   const observer = new IntersectionObserver(
@@ -67,6 +22,10 @@ onMounted(() => {
   const section = document.querySelector('#projects')
   if (section) observer.observe(section)
 })
+
+const navigateToProject = (id) => {
+  router.push({ name: 'project-detail', params: { id } })
+}
 </script>
 
 <template>
@@ -85,6 +44,7 @@ onMounted(() => {
           class="project-card"
           :class="{ 'coming-soon': project.isComingSoon }"
           :style="{ '--delay': index * 0.15 + 's', '--accent': project.color }"
+          @click="!project.isComingSoon && navigateToProject(project.id)"
         >
           <div class="project-header">
             <div class="project-icon">
@@ -98,6 +58,7 @@ onMounted(() => {
                 rel="noopener"
                 class="project-link"
                 title="GitHub"
+                @click.stop
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path
@@ -114,16 +75,22 @@ onMounted(() => {
             <p class="project-description">{{ project.description }}</p>
 
             <ul class="project-features" v-if="project.features.length">
-              <li v-for="feature in project.features" :key="feature">
+              <li v-for="feature in project.features.slice(0, 3)" :key="feature">
                 {{ feature }}
+              </li>
+              <li v-if="project.features.length > 3" class="more-features">
+                ...and more
               </li>
             </ul>
           </div>
 
           <div class="project-footer">
             <div class="project-tech">
-              <span v-for="tech in project.tech" :key="tech" class="tech-tag">
+              <span v-for="tech in project.tech.slice(0, 5)" :key="tech" class="tech-tag">
                 {{ tech }}
+              </span>
+              <span v-if="project.tech.length > 5" class="tech-tag more">
+                +{{ project.tech.length - 5 }}
               </span>
             </div>
           </div>

@@ -1,0 +1,78 @@
+export const projects = [
+  {
+    id: 1,
+    title: 'DevRunDev',
+    subtitle: 'IT 개발자를 위한 온라인 교육 플랫폼',
+    description:
+      '강사들은 실무 중심의 강의를 제작하고 수강생들은 최신 기술을 배우며 성장할 수 있도록 지원합니다. 강의 진행률, 평가 시스템, 강의 별 퀴즈 등의 기능을 통해 효율적인 학습 경험을 제공합니다.',
+    features: [
+      '역할 기반 사용자 시스템 (학생/강사/관리자)',
+      '소셜 로그인 (Google, Kakao, Naver)',
+      '강의 생성 및 승인 워크플로우',
+      '강의 진행률 추적 및 수료증 발급',
+      '퀴즈 시스템 및 리뷰 기능',
+    ],
+    tech: ['Django', 'SQLite', 'Bootstrap 5', 'JavaScript', 'HTML5/CSS3', 'Git'],
+    github: 'https://github.com/DevRunDev/DevRunDev',
+    color: '#22c55e',
+  },
+  {
+    id: 2,
+    title: 'DevRunDev DRF',
+    subtitle: 'REST API 기반 온라인 교육 플랫폼',
+    description:
+      'DevRunDev의 REST API 버전으로, Django REST Framework를 활용하여 백엔드 API를 구축했습니다. 결제 시스템, QnA 기능, 관리자 대시보드 등 더욱 확장된 기능을 제공합니다.',
+    features: [
+      'RESTful API 설계 및 구현',
+      'JWT/Token 기반 인증 시스템',
+      '결제 시스템 통합',
+      '레슨별 QnA 기능',
+      '관리자 대시보드 및 분석',
+    ],
+    tech: ['Django', 'Django REST Framework', 'SQLite', 'HTMX', 'JWT Auth', 'Swagger UI'],
+    github: 'https://github.com/DevRunDev-DRF/DevRunDev-DRF',
+    color: '#6366f1',
+  },
+  {
+    id: 3,
+    title: 'Kick On',
+    subtitle: 'EPL 정보 & AI 챗봇 플랫폼',
+    description:
+      'EPL 팬들을 위한 데이터 기반 종합 정보 플랫폼입니다. 실시간 경기 데이터와 AI 챗봇을 결합하여 깊이 있는 분석과 예측 정보를 제공합니다.',
+    features: [
+      '실시간 순위 및 경기 데이터 제공',
+      'RAG 기반 AI 축구 전문가 챗봇',
+      '커스텀 알고리즘 기반 경기 결과 예측',
+      '팀별 전력 분석 및 시각화',
+      '반응형 웹 디자인',
+    ],
+    tech: [
+      'Vue 3',
+      'Pinia',
+      'TailwindCSS',
+      'Django DRF',
+      'PostgreSQL',
+      'GCP',
+      'Cloud SQL',
+      'Docker',
+      'uv',
+      'Ruff',
+      'LangChain',
+      'OpenAI',
+    ],
+    github: 'https://github.com/Kimkangyeon-17/kick_on',
+    color: '#7c3aed',
+  },
+  {
+    id: 4,
+    title: 'Coming Soon',
+    subtitle: '새로운 프로젝트 준비 중',
+    description:
+      '더 나은 서비스와 기술 역량 향상을 위해 새로운 프로젝트를 준비하고 있습니다. 곧 업데이트될 예정이니 기대해 주세요!',
+    features: [],
+    tech: ['TBD'],
+    github: null,
+    color: '#8b5cf6',
+    isComingSoon: true,
+  },
+]
